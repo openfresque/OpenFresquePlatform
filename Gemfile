@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.2.2"
 
-gem 'open_fresk', :github => 'https://github.com/fresqueduclimat/OpenFresk', :branch => 'feature/forget-password'
+gem 'open_fresk', :github => 'https://github.com/fresqueduclimat/OpenFresk', :branch => 'feature/administrate'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.8", ">= 7.0.8.1"
