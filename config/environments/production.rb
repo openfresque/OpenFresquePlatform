@@ -90,4 +90,14 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: ENV.fetch("SMTP_HOST", "smtp-relay.brevo.com"),
+    port: ENV.fetch("SMTP_PORT", "587"),
+    authentication: :plain,
+    user_name: ENV["SMTP_USERNAME"],
+    password: ENV["SMTP_PASSWORD"],
+    enable_starttls_auto: true
+  }
 end

@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.2.2"
 
-gem "open_fresk", "~> 0.1.1"
+gem 'open_fresk', :github => 'https://github.com/fresqueduclimat/OpenFresk', :branch => 'feature/forget-password'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.8", ">= 7.0.8.1"
@@ -60,6 +60,8 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  gem "letter_opener_web"
+  gem "dotenv-rails", "~> 2.7.6"
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
