@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/https://github.com/fresqueduclimat/OpenFresk.git
-  revision: 37f31c499f1772fedba101880cec015e48f9d548
+  revision: 104d6fbf837e22bac69d5e3a418763f163c594fb
   branch: feature/forget-password
   specs:
     open_fresk (0.1.1)
