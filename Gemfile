@@ -35,7 +35,7 @@ gem "jbuilder"
 gem "redis", "4.6.0"
 gem "sidekiq", "6.5.12"
 gem "administrate"
-gem "attr_encrypted", "~> 3.1"
+gem "attr_encrypted", "4.2.0"
 
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
