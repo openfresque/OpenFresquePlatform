@@ -78,3 +78,4 @@ group :test do
 end
 
 gem "administrate"
+gem "attr_encrypted", "4.2.0"
