@@ -10,11 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2021_11_19_233449) do
+ActiveRecord::Schema[7.0].define(version: 2025_05_18_141134) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "open_fresk_smtp_settings", force: :cascade do |t|
+    t.string "host", null: false
+    t.integer "port", default: 587, null: false
+    t.string "username", null: false
+    t.string "password", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "smtp_settings", force: :cascade do |t|
+    t.integer "port", null: false
+    t.string "domain", null: false
+    t.string "authentication", default: "plain", null: false
+    t.string "user_name", null: false
+    t.string "encrypted_password", null: false
+    t.string "encrypted_password_iv", null: false
+    t.boolean "enable_starttls_auto", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "training_sessions", force: :cascade do |t|
     t.text "description"
