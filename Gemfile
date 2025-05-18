@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.2.2"
 
-gem 'open_fresk', :github => 'https://github.com/fresqueduclimat/OpenFresk', :branch => 'main'
+gem 'open_fresk', :git => 'https://github.com/fresqueduclimat/OpenFresk.git', :branch => 'main'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.8", ">= 7.0.8.1"
@@ -78,4 +78,4 @@ group :test do
 end
 
 gem "administrate"
-gem "attr_encrypted", "4.2.0"
+gem "attr_encrypted", "~> 3.1"
