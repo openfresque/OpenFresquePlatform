@@ -6,7 +6,6 @@ if Rails.env.production?
       if smtp_setting.present?
         Rails.application.config.action_mailer.delivery_method = :smtp
         Rails.application.config.action_mailer.smtp_settings = {
-                                                                 address: smtp_setting.address,
                                                                  port: smtp_setting.port,
                                                                  domain: smtp_setting.domain,
                                                                  authentication: smtp_setting.authentication&.to_sym,
