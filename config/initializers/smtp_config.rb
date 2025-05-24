@@ -21,7 +21,7 @@ if Rails.env.production?
       smtp_setting = SmtpSetting.first
 
       if smtp_setting.present?
-        Rails.application.config.action_mailer.smtp_settings = {
+        settings = {
           address: smtp_setting.domain,
           port: smtp_setting.port,
           authentication: smtp_setting.authentication.to_sym,
@@ -29,9 +29,19 @@ if Rails.env.production?
           password: smtp_setting.password,
           enable_starttls_auto: smtp_setting.enable_starttls_auto,
         }
+        # Directly configure ActionMailer::Base
+        ActionMailer::Base.smtp_settings = settings
+        ActionMailer::Base.delivery_method = :smtp # Ensure delivery method is also set
+        Rails.logger.info "SMTP Config Initializer: ActionMailer::Base.smtp_settings configured directly."
+        # Optionally, you can still set the config for consistency if other parts of your app read it,
+        # but the direct ActionMailer::Base configuration is key for sending.
+        Rails.application.config.action_mailer.smtp_settings = settings
+        Rails.application.config.action_mailer.delivery_method = :smtp
       else
         Rails.logger.warn "SMTP Config Initializer: SmtpSetting not found or incomplete in database. SMTP not configured. Email delivery will likely fail."
       end
+    rescue ActiveRecord::ConnectionNotEstablished, PG::ConnectionBad => db_e
+      Rails.logger.error "SMTP Config Initializer: Database connection not established. Cannot load SMTP settings. Error: #{db_e.class}: #{db_e.message}"
     rescue StandardError => e
       Rails.logger.error "SMTP Config Initializer: Failed to configure ActionMailer from database due to an error during initialization. SMTP not configured. Email delivery will likely fail. Error: #{e.class}: #{e.message}"
     end
