@@ -62,7 +62,15 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "OpenFresquePlatform_production"
 
-  config.action_mailer.perform_caching = false
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'smtp-relay.brevo.com',
+    port: '587',
+    authentication: :plain,
+    user_name: 'login@fresqueduclimat.org',
+    password: 'xsmtpsib-96d251fb7c007d1a73f5b42888f2c0cb04b084766f6065d22f8fe6f76048915b-Nq6CIhsbgktP4J5p',
+    enable_starttls_auto: true
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
