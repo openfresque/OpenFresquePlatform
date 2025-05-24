@@ -1,5 +1,22 @@
 if Rails.env.production?
   Rails.application.config.after_initialize do
+    Rails.logger.info "SMTP_CONFIG_DEBUG: Initializer running in #{Process.pid}"
+    key_value = ENV['ATTR_ENCRYPTED_KEY']
+    if key_value.blank?
+      Rails.logger.warn "SMTP_CONFIG_DEBUG: ATTR_ENCRYPTED_KEY is BLANK or NIL."
+    elsif key_value.length.odd?
+      Rails.logger.warn "SMTP_CONFIG_DEBUG: ATTR_ENCRYPTED_KEY has ODD length: #{key_value.length}, value (first 5 chars): #{key_value.first(5)}"
+    else
+      Rails.logger.info "SMTP_CONFIG_DEBUG: ATTR_ENCRYPTED_KEY seems present and even length: #{key_value.length}, value (first 5 chars): #{key_value.first(5)}"
+    end
+
+    begin
+      db_active = ActiveRecord::Base.connection.active?
+      Rails.logger.info "SMTP_CONFIG_DEBUG: ActiveRecord connection active? #{db_active}"
+    rescue StandardError => db_err
+      Rails.logger.error "SMTP_CONFIG_DEBUG: Error checking ActiveRecord connection: #{db_err.message}"
+    end
+
     begin
       smtp_setting = SmtpSetting.first
 
