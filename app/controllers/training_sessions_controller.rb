@@ -1,4 +1,9 @@
 class TrainingSessionsController < ::OpenFresk::TrainingSessionsController
+
+    def index
+        @my_training_sessions = TrainingSession.my_sessions(current_user)
+    end
+
     def new
         @training_session = TrainingSession.new
     end
