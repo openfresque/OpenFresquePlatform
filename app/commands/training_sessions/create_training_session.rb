@@ -12,7 +12,6 @@ module TrainingSessions
     end
 
     def call
-      training_session_params[:time_zone] = current_user.time_zone if @past
       set_training_time(
         training_session:,
         params: training_session_params,

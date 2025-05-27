@@ -13,8 +13,8 @@ class TrainingSessionsController < ::OpenFresk::TrainingSessionsController
         )
         @training_session = command.call
     
-        if @training_session.errors.blank?istration_command
-          redirect_to product_configurations_training_session_path(@training_session),
+        if @training_session.errors.blank?
+          redirect_to training_sessions_path,
                       notice: t("training_sessions.created")
         else
           render :new
@@ -28,6 +28,7 @@ class TrainingSessionsController < ::OpenFresk::TrainingSessionsController
           .permit(
             :description,
             :language_id,
+            :country_id,
             :date,
             :start_hour,
             :end_hour,
@@ -42,6 +43,8 @@ class TrainingSessionsController < ::OpenFresk::TrainingSessionsController
             :capacity,
             :public,
             :session_info,
+            :latitude, 
+            :longitude
           )
       end
       

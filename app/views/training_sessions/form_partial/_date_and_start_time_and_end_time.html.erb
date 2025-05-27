@@ -7,7 +7,6 @@
          required: true, "data-load-flatpickr-target": "flatpickr"  %>
       <button class="btn btn-outline-secondary" type="button" onclick="document.getElementById('date_input').click()" name="calendar" ><%= fa_icon ('calendar-alt') %></button>
     </div>
-    <%= link_to(fa_icon("globe-americas", text: t('training_sessions.timezone_choice')), "#tzModal", data: { bs_toggle: "modal", bs_target: "#tzModal"}, class: "text-secondary small") %>
   </div>
   <% unless params[:past] == "true" %>
     <div class="mb-3">
@@ -20,4 +19,3 @@
     </div>
   <% end %>
 </div>
-<p class="small text-secondary"><%= t('training_sessions.annonce_recurrence') %></p>

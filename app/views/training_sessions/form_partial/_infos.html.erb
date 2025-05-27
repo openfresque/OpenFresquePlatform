@@ -1,4 +1,4 @@
-<div class="mb-3 border-bottom" data-controller="trix">
+<div class="mb-3 border-bottom">
   <div class="d-flex align-items-center">
     <%= form.label t('training_sessions.session_info') %>
     <div class="my-auto">
@@ -12,5 +12,5 @@
       </div>
     </div>
   </div>
-  <%= form.rich_text_area :session_info, class: 'form-control mb-3', data: { trix_target: 'editor' } %>
+  <%= form.text_area :session_info, class: 'form-control mb-3' %>
 </div>
