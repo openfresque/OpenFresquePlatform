@@ -10,11 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_05_18_141134) do
+ActiveRecord::Schema[7.0].define(version: 2025_05_27_132744) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "countries", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.string "currency_name"
+    t.string "currency_code"
+    t.string "external_id"
+    t.integer "tax_rate", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "languages", force: :cascade do |t|
+    t.string "name"
+    t.string "iso3"
+    t.string "french_name"
+    t.string "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "open_fresk_smtp_settings", force: :cascade do |t|
+    t.string "host", null: false
+    t.integer "port", default: 587, null: false
+    t.string "username", null: false
+    t.string "password", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "smtp_settings", force: :cascade do |t|
     t.integer "port", null: false
