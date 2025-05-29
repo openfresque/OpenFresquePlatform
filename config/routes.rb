@@ -12,7 +12,5 @@ Rails.application.routes.draw do
 
   mount OpenFresk::Engine => "/"
 
-
   resources :training_sessions
-
 end
