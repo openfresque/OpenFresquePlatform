@@ -64,6 +64,9 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_storage-postgresql (0.3.1)
+      pg (>= 1.0, < 2.0, != 1.4.5, != 1.4.4, != 1.4.3, != 1.4.2, != 1.4.1, != 1.4.0, != 1.3.5, != 1.3.4, != 1.3.3, != 1.3.2, != 1.3.1, != 1.3.0)
+      rails (>= 6.0)
     activejob (7.0.8.1)
       activesupport (= 7.0.8.1)
       globalid (>= 0.3.6)
@@ -94,6 +97,9 @@ GEM
       kaminari (~> 1.2.2)
       sassc-rails (~> 2.1)
       selectize-rails (~> 0.6)
+    administrate-field-active_storage (1.0.6)
+      administrate (>= 0.2.2)
+      rails (>= 7.0)
     attr_encrypted (4.2.0)
       encryptor (~> 3.0.0)
     autoprefixer-rails (10.4.21.0)
@@ -348,7 +354,9 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  active_storage-postgresql
   administrate
+  administrate-field-active_storage
   attr_encrypted (= 4.2.0)
   bcrypt (~> 3.1.7)
   bootsnap

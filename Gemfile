@@ -15,6 +15,7 @@ gem "sprockets-rails"
 
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
+gem 'active_storage-postgresql'
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
@@ -35,6 +36,7 @@ gem "jbuilder"
 gem "redis", "4.6.0"
 gem "sidekiq", "6.5.12"
 gem "administrate"
+gem "administrate-field-active_storage"
 gem "attr_encrypted", "4.2.0"
 
 
