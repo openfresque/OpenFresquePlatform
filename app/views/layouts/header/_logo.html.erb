@@ -1,0 +1,10 @@
+<%= link_to root_path(language: params[:language]), class: "navbar-brand" do %>
+  <div class="d-flex fs-6 fw-bold lh-sm">
+    <% open_fresk_setting = OpenFreskSetting.first %>
+    <% if open_fresk_setting&.logo&.attached? %>
+      <%= image_tag open_fresk_setting.logo %>
+    <% else %>
+      <%= image_tag "open_fresk/logos/logo.png" %>
+    <% end %>
+  </div>
+<% end %>
