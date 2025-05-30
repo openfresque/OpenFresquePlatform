@@ -1,0 +1,2 @@
+class ApplicationDecorator < SimpleDelegator
+end

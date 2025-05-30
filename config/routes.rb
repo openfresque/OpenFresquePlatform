@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  resources :countries
-  resources :languages
   namespace :admin do
       resources :training_sessions
       resources :users
@@ -14,4 +12,5 @@ Rails.application.routes.draw do
   mount OpenFresk::Engine => "/"
 
   resources :training_sessions
+  resources :session_participations, only: %i[show]
 end
