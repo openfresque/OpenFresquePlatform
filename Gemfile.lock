@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/fresqueduclimat/OpenFresk.git
-  revision: 454dcde5f0c5610e477f1a39d93ba0d11a040cb5
-  branch: main
+  revision: b2a63e81271a05f58eebfb3047c14a3e4736581c
+  branch: 2919-as_an_admin_i_can_choose_a_small_color_chart
   specs:
     open_fresk (0.1.1)
       bootstrap (= 5.3.1)

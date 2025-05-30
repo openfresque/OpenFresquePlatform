@@ -1,0 +1,12 @@
+<div class="field-unit__label">
+  <%= f.label field.attribute %>
+</div>
+
+<div class="field-unit__field">
+  <%= f.color_field field.attribute,
+      value: (field.data.presence || "#007e7c"),
+      name: "color_setting[#{field.attribute}]",
+      id: field.attribute,
+      style: "width: 4rem; height: 4rem;" %>
+
+</div>

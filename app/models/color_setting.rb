@@ -1,0 +1,2 @@
+class ColorSetting < ApplicationRecord
+end

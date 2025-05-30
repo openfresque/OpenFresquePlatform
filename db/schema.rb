@@ -10,11 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_05_18_141134) do
+ActiveRecord::Schema[7.0].define(version: 2025_05_29_084139) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "color_settings", force: :cascade do |t|
+    t.string "primary_color", default: "#007e7c"
+    t.string "secondary_color", default: "#d3d7de"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "smtp_settings", force: :cascade do |t|
     t.integer "port", null: false
