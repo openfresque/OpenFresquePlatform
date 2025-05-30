@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/fresqueduclimat/OpenFresk.git
   revision: 836d42d141c6bf63a63a443b02190aed1b0a6cdb
-  branch: main
+  branch: feature/show-training-session
   specs:
     open_fresk (0.1.1)
       bootstrap (= 5.3.1)
