@@ -1,11 +1,12 @@
 GIT
   remote: https://github.com/fresqueduclimat/OpenFresk.git
-  revision: b2a63e81271a05f58eebfb3047c14a3e4736581c
-  branch: 2919-as_an_admin_i_can_choose_a_small_color_chart
+  revision: 97d9c2304aa665aa4b1ae8768fedb5407ddf512c
+  branch: main
   specs:
     open_fresk (0.1.1)
       bootstrap (= 5.3.1)
       concurrent-ruby (= 1.3.4)
+      flatpickr
       font_awesome5_rails (= 1.5.0)
       pg
       puma
@@ -63,6 +64,9 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_storage-postgresql (0.3.1)
+      pg (>= 1.0, < 2.0, != 1.4.5, != 1.4.4, != 1.4.3, != 1.4.2, != 1.4.1, != 1.4.0, != 1.3.5, != 1.3.4, != 1.3.3, != 1.3.2, != 1.3.1, != 1.3.0)
+      rails (>= 6.0)
     activejob (7.0.8.1)
       activesupport (= 7.0.8.1)
       globalid (>= 0.3.6)
@@ -93,11 +97,14 @@ GEM
       kaminari (~> 1.2.2)
       sassc-rails (~> 2.1)
       selectize-rails (~> 0.6)
+    administrate-field-active_storage (1.0.6)
+      administrate (>= 0.2.2)
+      rails (>= 7.0)
     attr_encrypted (4.2.0)
       encryptor (~> 3.0.0)
     autoprefixer-rails (10.4.21.0)
       execjs (~> 2)
-    base64 (0.2.0)
+    base64 (0.3.0)
     bcrypt (3.1.20)
     bindex (0.8.1)
     bootsnap (1.18.6)
@@ -130,6 +137,7 @@ GEM
       dotenv (= 2.7.6)
       railties (>= 3.2)
     encryptor (3.0.0)
+    erb (5.0.1)
     erubi (1.13.1)
     execjs (2.10.0)
     ffi (1.17.2-aarch64-linux-gnu)
@@ -140,6 +148,7 @@ GEM
     ffi (1.17.2-x86_64-darwin)
     ffi (1.17.2-x86_64-linux-gnu)
     ffi (1.17.2-x86_64-linux-musl)
+    flatpickr (4.6.13.1)
     font_awesome5_rails (1.5.0)
       nokogiri (>= 1.11.3)
       railties (>= 4.2)
@@ -239,7 +248,7 @@ GEM
     puma (5.6.9)
       nio4r (~> 2.0)
     racc (1.8.1)
-    rack (2.2.15)
+    rack (2.2.16)
     rack-test (2.2.0)
       rack (>= 1.3)
     rails (7.0.8.1)
@@ -256,7 +265,7 @@ GEM
       activesupport (= 7.0.8.1)
       bundler (>= 1.15.0)
       railties (= 7.0.8.1)
-    rails-dom-testing (2.2.0)
+    rails-dom-testing (2.3.0)
       activesupport (>= 5.0.0)
       minitest
       nokogiri (>= 1.6)
@@ -270,8 +279,9 @@ GEM
       rake (>= 12.2)
       thor (~> 1.0)
       zeitwerk (~> 2.5)
-    rake (13.2.1)
-    rdoc (6.13.1)
+    rake (13.3.0)
+    rdoc (6.14.0)
+      erb
       psych (>= 4.0.0)
     redis (4.6.0)
     regexp_parser (2.10.0)
@@ -290,7 +300,7 @@ GEM
       sprockets-rails
       tilt
     selectize-rails (0.12.6)
-    selenium-webdriver (4.32.0)
+    selenium-webdriver (4.33.0)
       base64 (~> 0.2)
       logger (~> 1.4)
       rexml (~> 3.2, >= 3.2.5)
@@ -325,13 +335,13 @@ GEM
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
     websocket (1.2.11)
-    websocket-driver (0.7.7)
+    websocket-driver (0.8.0)
       base64
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.7.2)
+    zeitwerk (2.7.3)
 
 PLATFORMS
   aarch64-linux-gnu
@@ -344,7 +354,9 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  active_storage-postgresql
   administrate
+  administrate-field-active_storage
   attr_encrypted (= 4.2.0)
   bcrypt (~> 3.1.7)
   bootsnap

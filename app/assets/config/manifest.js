@@ -2,4 +2,4 @@
 //= link_directory ../stylesheets .css
 //= link_tree ../../javascript .js
 //= link_tree ../../../vendor/javascript .js
-//= link open_fresk/recover_password.js
+//= link administrate-field-active_storage/application.css
