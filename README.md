@@ -111,7 +111,14 @@ After deploying the OpenFresk codebase to your production server, follow these s
     This step prepares your assets for efficient serving in a production environment.
 
 4.  **Run the Server:**
-    - Below is an example command demonstrating how to set common Puma configuration options via environment variables. You should adjust these values based on your server's resources and expected load:
+    For a production deployment, you typically need two main processes running:
+
+    1.  **Web Process (Puma):** Handles incoming HTTP requests and serves your application.
+    2.  **Worker Process (Sidekiq):** Processes background jobs, such as sending emails, performing calculations, or other tasks that don't need to block the web request-response cycle.
+
+    - Start the Rails server in production mode.
+      Below is an example command demonstrating how to set common Puma configuration options via environment variables. You should adjust these values based on your server's resources and expected load:
+
       ```bash
       RAILS_ENV=production \
       PORT=3000 \
@@ -120,11 +127,22 @@ After deploying the OpenFresk codebase to your production server, follow these s
       WEB_CONCURRENCY=2 \
       bundle exec puma -C config/puma.rb
       ```
+
       - `RAILS_ENV=production`: Sets the application environment to production.
       - `PORT=3000`: Specifies the port Puma will listen on.
       - `RAILS_MIN_THREADS=5`: Sets the minimum number of threads per Puma worker.
       - `RAILS_MAX_THREADS=16`: Sets the maximum number of threads per Puma worker.
       - `WEB_CONCURRENCY=2`: Sets the number of Puma worker processes (if using clustered mode; ensure `workers ENV.fetch("WEB_CONCURRENCY")` is uncommented in `config/puma.rb`).
+
+      To start the Sidekiq worker process, use a command similar to the one found in the `Procfile`:
+
+      ```bash
+      RAILS_ENV=production WORKER_THREADS=5 bundle exec sidekiq -q default -q mailers
+      ```
+
+      - `RAILS_ENV=production`: Ensures Sidekiq runs in the production environment.
+      - `WORKER_THREADS=5`: (Example) Sets the number of threads Sidekiq will use for processing jobs. Adjust this based on your needs and server capacity. This value is often passed via an environment variable like `$WORKER_THREADS` in `Procfile` contexts.
+      - `-q default -q mailers`: Specifies the queues Sidekiq should process. In this example, it processes jobs from the `default` queue and the `mailers` queue.
 
 ---
 
