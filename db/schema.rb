@@ -16,13 +16,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_29_125452) do
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
-  create_table "color_settings", force: :cascade do |t|
-    t.string "primary_color", default: "#007e7c"
-    t.string "secondary_color", default: "#d3d7de"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -57,6 +50,13 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_29_125452) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "color_settings", force: :cascade do |t|
+    t.string "primary_color", default: "#007e7c"
+    t.string "secondary_color", default: "#d3d7de"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "countries", force: :cascade do |t|
     t.string "name"
     t.string "code"
@@ -88,6 +88,8 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_29_125452) do
     t.integer "port", default: 587, null: false
     t.string "username", null: false
     t.string "password", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "smtp_settings", force: :cascade do |t|
