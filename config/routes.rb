@@ -3,6 +3,7 @@ Rails.application.routes.draw do
       resources :training_sessions
       resources :users
       resources :smtp_settings
+      resources :color_settings
       resources :open_fresk_settings
 
       root to: "users#index"
