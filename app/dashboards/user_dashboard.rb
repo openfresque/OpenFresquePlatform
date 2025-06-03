@@ -12,9 +12,9 @@ class UserDashboard < Administrate::BaseDashboard
     admin: Field::Boolean,
     email: Field::String,
     firstname: Field::String,
-    language: Field::String,
+    language: Field::Select.with_options(collection: ["fr", "en"]),
     lastname: Field::String,
-    password_digest: Field::String,
+    password: Field::String,
     refresh_token: Field::String,
     token: Field::String,
     created_at: Field::DateTime,
@@ -40,11 +40,8 @@ class UserDashboard < Administrate::BaseDashboard
     admin
     email
     firstname
-    language
     lastname
-    password_digest
-    refresh_token
-    token
+    language
     created_at
     updated_at
   ].freeze
@@ -58,9 +55,7 @@ class UserDashboard < Administrate::BaseDashboard
     firstname
     language
     lastname
-    password_digest
-    refresh_token
-    token
+    password
   ].freeze
 
   # COLLECTION_FILTERS
