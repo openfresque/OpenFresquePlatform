@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_05_29_125452) do
+ActiveRecord::Schema[7.0].define(version: 2025_06_03_163737) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -136,8 +136,8 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_29_125452) do
     t.string "lastname"
     t.string "password_digest", null: false
     t.boolean "admin", default: false, null: false
-    t.string "token", null: false
-    t.string "refresh_token", null: false
+    t.string "token", default: "uuid_generate_v4()", null: false
+    t.string "refresh_token", default: "uuid_generate_v4()", null: false
     t.string "language", default: "fr", null: false
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
