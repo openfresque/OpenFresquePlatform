@@ -51,10 +51,10 @@ class UserDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     admin
-    email
     firstname
-    language
     lastname
+    language
+    email
     password
   ].freeze
 
