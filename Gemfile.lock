@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/fresqueduclimat/OpenFresk.git
-  revision: 09ecbfa06e0eb4b9e97d52b1f514af777541f872
+  revision: 61e92f56e7158f3604a7a819ff095186e4f8f840
   branch: feature/feedback-lea-sessions
   specs:
     open_fresk (0.1.1)
