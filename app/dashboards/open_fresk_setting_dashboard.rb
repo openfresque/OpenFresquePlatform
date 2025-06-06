@@ -11,6 +11,7 @@ class OpenFreskSettingDashboard < Administrate::BaseDashboard
     id: Field::Number,
     non_profit_name: Field::String,
     logo: Field::ActiveStorage, # Changed back to ActiveStorage after installing the plugin
+    favicon: Field::ActiveStorage,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -23,6 +24,7 @@ class OpenFreskSettingDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     non_profit_name
     logo
+    favicon
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -30,6 +32,7 @@ class OpenFreskSettingDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     non_profit_name
     logo
+    favicon
     created_at
     updated_at
   ].freeze
@@ -40,6 +43,7 @@ class OpenFreskSettingDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     non_profit_name
     logo
+    favicon
   ].freeze
 
   # COLLECTION_FILTERS
