@@ -12,12 +12,10 @@ export default class extends Controller {
   ];
 
   connect() {
-    console.log("TrainingSessionsFormatController connected");
     this.update();
   }
 
   click() {
-    console.log("TrainingSessionsFormatController clicked");
     this.update();
   }
 
