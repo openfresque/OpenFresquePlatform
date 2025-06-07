@@ -15,6 +15,7 @@ class SmtpSettingDashboard < Administrate::BaseDashboard
     password: Field::Password,
     port: Field::Number,
     user_name: Field::String,
+    from_address: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -28,6 +29,7 @@ class SmtpSettingDashboard < Administrate::BaseDashboard
     id
     domain
     user_name
+    from_address
     port
   ].freeze
 
@@ -40,6 +42,7 @@ class SmtpSettingDashboard < Administrate::BaseDashboard
     enable_starttls_auto
     port
     user_name
+    from_address
     created_at
     updated_at
   ].freeze
@@ -52,6 +55,7 @@ class SmtpSettingDashboard < Administrate::BaseDashboard
     port
     user_name
     password
+    from_address
   ].freeze
 
   # COLLECTION_FILTERS

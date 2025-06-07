@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/fresqueduclimat/OpenFresk.git
-  revision: aad342d82f2188fa7f60c86f5905ecec712560db
-  branch: main
+  revision: 61e92f56e7158f3604a7a819ff095186e4f8f840
+  branch: feature/feedback-lea-sessions
   specs:
     open_fresk (0.1.1)
       bootstrap (= 5.3.1)
@@ -248,7 +248,7 @@ GEM
     puma (5.6.9)
       nio4r (~> 2.0)
     racc (1.8.1)
-    rack (2.2.16)
+    rack (2.2.17)
     rack-test (2.2.0)
       rack (>= 1.3)
     rails (7.0.8.1)

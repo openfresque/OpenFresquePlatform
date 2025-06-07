@@ -9,8 +9,9 @@ class OpenFreskSettingDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    NonProfitName: Field::String,
+    non_profit_name: Field::String,
     logo: Field::ActiveStorage, # Changed back to ActiveStorage after installing the plugin
+    favicon: Field::ActiveStorage,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -21,15 +22,17 @@ class OpenFreskSettingDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    NonProfitName
+    non_profit_name
     logo
+    favicon
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    NonProfitName
+    non_profit_name
     logo
+    favicon
     created_at
     updated_at
   ].freeze
@@ -38,8 +41,9 @@ class OpenFreskSettingDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    NonProfitName
+    non_profit_name
     logo
+    favicon
   ].freeze
 
   # COLLECTION_FILTERS

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_06_05_041217) do
+ActiveRecord::Schema[7.0].define(version: 2025_06_06_182713) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -78,7 +78,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_05_041217) do
   end
 
   create_table "open_fresk_settings", force: :cascade do |t|
-    t.string "NonProfitName"
+    t.string "non_profit_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -102,6 +102,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_05_041217) do
     t.boolean "enable_starttls_auto", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "from_address"
   end
 
   create_table "training_sessions", force: :cascade do |t|
