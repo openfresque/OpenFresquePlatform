@@ -92,6 +92,31 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_06_182713) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "product_configurations", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "country_id", null: false
+    t.integer "before_tax_price_cents"
+    t.integer "tax_cents"
+    t.integer "after_tax_price_cents"
+    t.decimal "tax_rate", precision: 3, scale: 1
+    t.string "currency"
+    t.string "display_name", null: false
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id", "country_id"], name: "index_product_configurations_on_product_id_and_country_id", unique: true
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "identifier", null: false
+    t.string "category", null: false
+    t.boolean "charged", default: false, null: false
+    t.boolean "price_modifiable", default: false, null: false
+    t.string "audience"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "smtp_settings", force: :cascade do |t|
     t.integer "port", null: false
     t.string "domain", null: false
