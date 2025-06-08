@@ -13,8 +13,6 @@ Rails.application.routes.draw do
     end
   root to: "training_sessions#index"
 
-  mount OpenFresk::Engine => "/"
-
   resources :training_sessions do
     member do
       get :product_configurations
@@ -22,4 +20,6 @@ Rails.application.routes.draw do
     end
   end
   resources :session_participations, only: %i[show]
+
+  mount OpenFresk::Engine => "/"
 end
