@@ -15,6 +15,11 @@ Rails.application.routes.draw do
 
   mount OpenFresk::Engine => "/"
 
-  resources :training_sessions
+  resources :training_sessions do
+    member do
+      get :product_configurations
+      post :set_product_configurations
+    end
+  end
   resources :session_participations, only: %i[show]
 end
