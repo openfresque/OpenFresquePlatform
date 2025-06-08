@@ -1,7 +1,7 @@
 class TrainingSessionsController < ::OpenFresk::TrainingSessionsController
 
   before_action :set_training_session,
-                  only: %i[product_configurations update destroy]
+                  only: %i[edit update destroy product_configurations set_product_configurations]
   
   def create
     command = ::TrainingSessions::CreateTrainingSession.new(
@@ -51,13 +51,7 @@ class TrainingSessionsController < ::OpenFresk::TrainingSessionsController
         product_configuration:
       )
     end
-    redirect_to training_session_path(@training_session),
+    redirect_to edit_training_session_path(@training_session),
                 notice: t("training_sessions.updated")
-  end
-
-  private
-
-  def set_training_session
-    @training_session = TrainingSession.find(params[:id])
   end
 end
