@@ -92,6 +92,15 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_06_182713) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "product_configuration_sessions", force: :cascade do |t|
+    t.bigint "product_configuration_id", null: false
+    t.bigint "training_session_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_configuration_id"], name: "index_prod_config_sess_on_prod_config_id"
+    t.index ["training_session_id"], name: "index_prod_config_sess_on_train_sess_id"
+  end
+
   create_table "product_configurations", force: :cascade do |t|
     t.bigint "product_id", null: false
     t.bigint "country_id", null: false
@@ -174,4 +183,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_06_182713) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "product_configuration_sessions", "product_configurations"
+  add_foreign_key "product_configuration_sessions", "training_sessions"
 end

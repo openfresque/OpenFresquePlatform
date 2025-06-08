@@ -5,6 +5,9 @@ Rails.application.routes.draw do
       resources :smtp_settings
       resources :color_settings
       resources :open_fresk_settings
+      resources :products
+      resources :product_configurations
+      resources :product_configuration_sessions, only: %i[index show edit update]
 
       root to: "users#index"
     end
