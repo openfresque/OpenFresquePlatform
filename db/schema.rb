@@ -92,6 +92,19 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_06_182713) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "participations", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "training_session_id", null: false
+    t.string "status", default: "PENDING", null: false
+    t.datetime "presence_recorded_at", precision: nil
+    t.bigint "animator_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["animator_id"], name: "index_participations_on_animator_id"
+    t.index ["training_session_id"], name: "index_participations_on_training_session_id"
+    t.index ["user_id"], name: "index_participations_on_user_id"
+  end
+
   create_table "product_configuration_sessions", force: :cascade do |t|
     t.bigint "product_configuration_id", null: false
     t.bigint "training_session_id", null: false
@@ -165,6 +178,22 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_06_182713) do
     t.text "animator_session_info"
   end
 
+  create_table "transactions", force: :cascade do |t|
+    t.bigint "participation_id"
+    t.bigint "product_configuration_id"
+    t.text "stripe_response"
+    t.string "status"
+    t.integer "before_tax_price_cents"
+    t.integer "tax_cents"
+    t.integer "after_tax_price_cents"
+    t.string "currency"
+    t.string "payment_intent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["participation_id"], name: "index_transactions_on_participation_id"
+    t.index ["product_configuration_id"], name: "index_transactions_on_product_configuration_id"
+  end
+
   create_table "users", id: :serial, force: :cascade do |t|
     t.string "email", null: false
     t.string "firstname"
@@ -183,6 +212,9 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_06_182713) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "participations", "users", column: "animator_id"
   add_foreign_key "product_configuration_sessions", "product_configurations"
   add_foreign_key "product_configuration_sessions", "training_sessions"
+  add_foreign_key "transactions", "participations"
+  add_foreign_key "transactions", "product_configurations"
 end
