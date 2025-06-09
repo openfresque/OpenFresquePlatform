@@ -17,9 +17,28 @@ Rails.application.routes.draw do
     member do
       get :product_configurations
       post :set_product_configurations
+      get :show_public
     end
   end
+  
   resources :session_participations, only: %i[show]
+  
+  resources :public_participations, only: %i[create] do
+    collection do
+      get :ticket_choice
+      post :personal_informations
+      patch :update
+    end
+  end
+
+  resources :payments, only: %i[new create] do
+    collection do
+      post :create_payment_intent
+      get :confirmation
+      post :stripe_webhook
+    end
+  end
+  
 
   mount OpenFresk::Engine => "/"
 end

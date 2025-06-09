@@ -54,4 +54,22 @@ class TrainingSessionsController < ::OpenFresk::TrainingSessionsController
     redirect_to edit_training_session_path(@training_session),
                 notice: t("training_sessions.updated")
   end
+
+  def show_public
+    if params[:user_token].present?
+      user = User.find_by(token: params[:user_token])
+      @participation = @training_session.participations.find_by(user:)
+    end
+    @participation = Participation.new(training_session: @training_session) if @participation.nil?
+    training_session_products
+  end
+
+  private
+
+  def training_session_products
+    @products = @training_session
+                .product_configuration_sessions
+                .includes(:product_configuration)
+                .order("product_configurations.before_tax_price_cents")
+  end
 end

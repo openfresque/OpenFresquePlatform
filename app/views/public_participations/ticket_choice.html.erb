@@ -1,0 +1,84 @@
+<div class="col-lg-6 mx-auto my-3" id="ticket_choice">
+  <h3>
+    <%= t("training_sessions.ticket_choice.title") %>
+  </h3>
+  <%= form_tag(personal_informations_training_session_public_participations_path(language: @language), data: {turbo: false}) do %>
+    <%= hidden_field_tag :user_token, params[:user_token] %>
+    <%= hidden_field_tag :language, @language %>
+
+    <% if @training_session.inter_company? %>
+      <% unless @training_session.country&.switzerland? %>
+        <% @product_configurations.each do |product_configuration| %>
+          <div class="d-flex px-3 py-2 mb-3 rounded-3 product_configuration" id="<%= product_configuration.id %>">
+            <input type="radio" name="product_configuration_id" class="radio_button mt-1" id="product_configuration_id_<%= product_configuration.id %>" required value="<%= product_configuration.id %>" price_modifiable="<%= product_configuration.product.price_modifiable? %>">
+            <div>
+              <%= label_tag t("ticket_choice.inter_company.card_paiement"), nil, for: "product_configuration_id_#{product_configuration.id}", class: "ms-2 fw-bold" %>
+              <div class="text-secondary ms-2"><small><%= t("ticket_choice.inter_company.available_in_france") %></small></div>
+              <div class="text-secondary ms-2"><small><%= t("ticket_choice.inter_company.tva") %></small></div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+      <% if @product_configuration_coupon.present? %>
+        <div class="d-flex px-3 py-2 mb-3 rounded-3 product_configuration" id="<%= @product_configuration_coupon.id %>">
+          <input type="radio" name="product_configuration_id" class="radio_button mt-1" id="product_configuration_id_coupon" required value="<%= @product_configuration_coupon.id %>" class="radio_button" price_modifiable="false">
+          <div>
+            <%= label_tag t("ticket_choice.inter_company.use_coupon"), nil, for: "product_configuration_id_coupon", class: "ms-2 fw-bold" %>
+            <div class="text-secondary ms-2"><small><%= t("ticket_choice.inter_company.coupon_text") %></small></div>
+            <%= text_field_tag :coupon_code, nil, placeholder: "coupon" %>
+          </div>
+        </div>
+      <% end %>
+      <div class="d-flex justify-content-end">
+        <%= submit_tag t('next'), class: "btn btn-primary rounded-pill px-3 mb-3" %>
+      </div>
+      <div class="alert alert-primary">
+        <% if @training_session.country&.switzerland? %>
+          <div><%= t("ticket_choice.inter_company.switzerland_quote_html") %></div>
+        <% else %>
+          <div><%= t("ticket_choice.inter_company.bank_transfer") %></div>
+          <div><%= t("ticket_choice.inter_company.organisation_outside_france") %></div>
+          <div class="d-flex align-items-center">
+            <%= link_to(t("ticket_choice.inter_company.ask_for_quote"), new_public_opportunities_path(language: params[:language], opportunity: {session_type: @training_session.category}), class:"text-primary fw-bold", target: "_blank")%>
+            <%= fa_icon("chevron-right", class:"text-primary fw-bold ms-1") %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <% @product_configurations.each do |product_configuration| %>
+        <div class="d-flex align-items-center px-3 py-2 mb-3 rounded-3 product_configuration" id="<%= product_configuration.id %>">
+          <input type="radio" name="product_configuration_id" class="radio_button" id="product_configuration_id_<%= product_configuration.id %>" required value="<%= product_configuration.id %>" price_modifiable="<%= product_configuration.product.price_modifiable? %>">
+          <div class="d-flex flex-grow-1 justify-content-between align-items-center ms-2">
+            <div>
+              <%= label_tag product_configuration.display_name, nil, for: "product_configuration_id_#{product_configuration.id}" %>
+              <% if product_configuration.description %>
+                <br>
+                <%= label_tag product_configuration.description, nil, for: "product_configuration_id_#{product_configuration.id}", class: "small text-secondary" %>
+              <% end %>
+              <span class="<%= "d-none" if !product_configuration.product.charged? || product_configuration.price_modifiable? %>">
+                <%= product_configuration.after_tax_price.format %>  <%= t("invoice.vat_included") %>
+              </span>
+            </div>
+            <% if product_configuration.price_modifiable? %>
+                <%= number_field_tag :custom_price, nil, placeholder: "#{product_configuration.after_tax_price.format} #{t("invoice.vat_included")}", min: 1, required: true %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+      <% if @product_configuration_coupon.present? %>
+        <div class="d-flex align-items-center px-3 py-2 mb-3 rounded-3 product_configuration" id="<%= @product_configuration_coupon.id %>">
+          <input type="radio" name="product_configuration_id" id="product_configuration_id_coupon" required value="<%= @product_configuration_coupon.id %>" class="radio_button" price_modifiable="false">
+          <div class="d-flex flex-grow-1 justify-content-between align-items-center ms-2">
+            <%= label_tag t('training_sessions.coupon'), nil, for: "product_configuration_id_coupon" %>
+          </div>
+          <div>
+            <%= text_field_tag :coupon_code, nil, placeholder: "coupon" %>
+          </div>
+        </div>
+      <% end %>
+      <div class="d-flex justify-content-end">
+        <%= submit_tag t('next'), class: "btn btn-primary rounded-pill px-3" %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

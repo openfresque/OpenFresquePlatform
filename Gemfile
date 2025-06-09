@@ -39,6 +39,7 @@ gem "administrate"
 gem "administrate-field-active_storage"
 gem "attr_encrypted", "4.2.0"
 gem "money-rails", "1.15.0"
+gem "stripe", "5.55.0"
 
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
