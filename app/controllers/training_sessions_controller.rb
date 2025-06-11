@@ -1,7 +1,7 @@
 class TrainingSessionsController < ::OpenFresk::TrainingSessionsController
 
   before_action :set_training_session,
-                  only: %i[edit update destroy product_configurations set_product_configurations]
+                  only: %i[edit update destroy product_configurations set_product_configurations show_public]
   
   def create
     command = ::TrainingSessions::CreateTrainingSession.new(
@@ -56,11 +56,7 @@ class TrainingSessionsController < ::OpenFresk::TrainingSessionsController
   end
 
   def show_public
-    if params[:user_token].present?
-      user = User.find_by(token: params[:user_token])
-      @participation = @training_session.participations.find_by(user:)
-    end
-    @participation = Participation.new(training_session: @training_session) if @participation.nil?
+    @participation = Participation.new(training_session: @training_session)
     training_session_products
   end
 

@@ -19,17 +19,17 @@ Rails.application.routes.draw do
       post :set_product_configurations
       get :show_public
     end
+
+    resources :public_participations, only: %i[create] do
+      collection do
+        get :ticket_choice
+        post :personal_informations
+        patch :update
+      end
+    end
   end
   
   resources :session_participations, only: %i[show]
-  
-  resources :public_participations, only: %i[create] do
-    collection do
-      get :ticket_choice
-      post :personal_informations
-      patch :update
-    end
-  end
 
   resources :payments, only: %i[new create] do
     collection do

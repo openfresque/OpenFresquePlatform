@@ -6,10 +6,11 @@
   <% end %>
 
   <h3>
+    <% nonprofit_name = (defined?(OpenFreskSetting) && OpenFreskSetting.first) ? OpenFreskSetting.first.non_profit_name : "" %>
     <% if @training_session.atelier? %>
-      <%= t("training_sessions.fdc_atelier") %>
+      <%= t("training_sessions.atelier", nonprofit_name: nonprofit_name) %>
     <% else %>
-      <%= t("training_sessions.fdc_formation") %>
+      <%= t("training_sessions.formation", nonprofit_name: nonprofit_name) %>
     <% end %>
   </h3>
 
@@ -126,27 +127,6 @@
     <strong><%= t('training_sessions.description') %></strong>
     <%= training_session_description_text(@training_session) %>
   </div>
-
-    <!-- CONTACT -->
-  <% if @training_session.contact_email.nil? %>
-    <div class="mb-3 p-3 shadow rounded-3">
-      <div class="fs-6 mb-2"><%= t('training_sessions.contact') %></div>
-      <%= fa_icon('user', style: 'width: 30px') %>
-      <%= @training_session.created_by_user&.fullname %>
-      <br>
-      <%= fa_icon('envelope', style: 'width: 30px') %>
-      <%= @training_session.created_by_user&.email %>
-    </div>
-  <% else %>
-    <div class="mb-3 p-3 shadow rounded-3">
-      <div class="fs-6 mb-2"><%= t('training_sessions.contact') %></div>
-      <%= fa_icon('user', style: 'width: 30px') %>
-      <%= @training_session.contact_name %>
-      <br>
-      <%= fa_icon('envelope', style: 'width: 30px') %>
-      <%= @training_session.contact_email %>
-    </div>
-  <% end %>
 
 </div>
 <%= render "layouts/toast", message: t('link_copied') %>
