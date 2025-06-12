@@ -1,10 +1,10 @@
-class PublicParticipationsController < ApplicationController
+class PublicParticipationsController < OpenFresk::ApplicationController
   skip_before_action :authenticate_user!
   before_action :set_training_session
   before_action :set_participation, only: %i[personal_informations decline_participation]
 
   def ticket_choice
-    @language = Languages::SetLanguage.new(params, current_user).call
+    #@language = Languages::SetLanguage.new(params, current_user).call
     if @training_session.nil?
       flash[:alert] = t("training_sessions.not_found")
       return redirect_to public_training_sessions_path(tenant_token: Tenant.current.token, language: @language)
@@ -160,7 +160,7 @@ class PublicParticipationsController < ApplicationController
   end
 
   def set_training_session
-    @training_session = TrainingSession.find_by(uuid: params[:training_session_id])
+    @training_session = TrainingSession.find(params[:training_session_id])
   end
 
   def create_participation(participation_status)
