@@ -2,7 +2,6 @@ class Participation < ApplicationRecord
   include Decorable
 
   belongs_to :user
-  belongs_to :contact, class_name: "User", foreign_key: :contact_id
   belongs_to :training_session, inverse_of: :participations
   belongs_to :animator, class_name: "User", foreign_key: "animator_id"
   has_many :transactions, dependent: :destroy

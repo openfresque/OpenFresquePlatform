@@ -15,8 +15,6 @@ module Users
       @user.token = SecureRandom.uuid
       @user.refresh_token = SecureRandom.uuid
       @user.country_id = country_params[:country_id].to_i
-      set_language
-      @user.cgu = Time.current if user_params[:cgu] == "1"
       @user.save
 
       return @user if @user.errors.present?
@@ -27,9 +25,5 @@ module Users
     private
 
     attr_reader :user_params, :country_params, :current_user, :language
-
-    def set_language
-      "fr"
-    end
   end
 end

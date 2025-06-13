@@ -38,7 +38,6 @@ module Transactions
         contact: @contact || @user,
         user: @user,
         transaction_id: @transaction.id,
-        organisation: @organisation
       )
     end
   end

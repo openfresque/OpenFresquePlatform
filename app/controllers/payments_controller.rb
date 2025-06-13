@@ -1,4 +1,4 @@
-class PaymentsController < ApplicationController
+class PaymentsController < OpenFresk::ApplicationController
   skip_before_action :authenticate_user!
   skip_before_action :verify_authenticity_token, only: %i[create_payment_intent stripe_webhook]
   before_action :set_transaction, only: %i[new create_payment_intent]

@@ -7,7 +7,7 @@ module Participations
       @current_user = current_user
       @training_session = training_session
       @participation_status = participation_status
-      @animator = animator
+      @animator = animator || User.find(training_session.created_by_user_id) # TODO: Discuss this hack with bastien
     end
 
     def call
