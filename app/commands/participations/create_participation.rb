@@ -14,10 +14,6 @@ module Participations
 
     def call
       email_domain = participation_params[:email].split("@").last
-      if Tenant.current.whitelist_domains.any? && Tenant.current.whitelist_domains.exclude?(email_domain)
-        errors.add(:base, I18n.t("participations.not_in_whitelist_domains", email: participation_params[:email]))
-        return
-      end
 
       command = Users::CreateUser.new(
         user_params: create_user_params,

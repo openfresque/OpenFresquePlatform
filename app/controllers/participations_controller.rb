@@ -9,17 +9,17 @@ class ParticipationsController < ApplicationController
   def show
     return if @participation.user == @current_user
 
-    redirect_to public_training_sessions_path(tenant_token: Tenant.current.token, language: @language)
+    redirect_to public_training_sessions_path(language: @language)
   end
 
   def cancel
     raise "cannot cancel participation" unless @participation.cancelable?
 
     @participation.update!(status: Participation::Declined)
-    CancelParticipationJob.perform_later(@participation.training_session.id, @participation.user.id, Tenant.current.id)
+    CancelParticipationJob.perform_later(@participation.training_session.id, @participation.user.id)
     flash[:notice] = t("my_participation.cancelled")
     redirect_to show_public_training_session_path(@participation.training_session.uuid,
-                                                  user_token: @participation.user.token, tenant_token: Tenant.current.token, language: @language)
+                                                  user_token: @participation.user.token, language: @language)
   end
 
   def refund
@@ -34,14 +34,13 @@ class ParticipationsController < ApplicationController
         @transaction.update!(status: Transaction::Failure)
         flash[:alert] = t("my_participation.refund_failed")
         return redirect_to show_public_training_session_path(@participation.training_session.uuid,
-                                                             user_token: @participation.user.token, tenant_token: Tenant.current.token, language: @language)
+                                                             user_token: @participation.user.token, language: @language)
       end
       @transaction.update!(status: Transaction::Refund)
-      CancelParticipationJob.perform_later(@participation.training_session.id, @participation.user.id,
-                                           Tenant.current.id)
+      CancelParticipationJob.perform_later(@participation.training_session.id, @participation.user.id)
     end
     flash[:notice] = t("my_participation.refunded")
-    redirect_to public_training_sessions_path(tenant_token: Tenant.current.token, language: @language)
+    redirect_to public_training_sessions_path(language: @language)
   end
 
   def add_organiser

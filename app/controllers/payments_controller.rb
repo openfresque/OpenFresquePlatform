@@ -42,14 +42,13 @@ class PaymentsController < ApplicationController
     if params["redirect_status"] == "succeeded"
       transaction.update!(status: Transaction::Success)
       transaction.participation.update!(status: Participation::Confirmed)
-      Participations::SessionRegistrationConfirmationJob.perform_later(transaction.participation.id, Tenant.current.id)
+      Participations::SessionRegistrationConfirmationJob.perform_later(transaction.participation.id)
       if transaction.participation.training_session.qualiopi?
         SendConventionJob.perform_later(transaction.participation.id)
       end
       flash[:notice] = t("my_participation.confirmed", email: transaction.user.email)
       redirect_to show_public_training_session_path(transaction.training_session.uuid,
-                                                    user_token: transaction.participation.user.token,
-                                                    tenant_token: Tenant.current.token, language:)
+                                                    user_token: transaction.participation.user.token)
     else
       transaction.update!(status: Transaction::Failure)
       flash[:alert] = t("my_participation.payment_failed")

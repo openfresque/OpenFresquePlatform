@@ -55,7 +55,7 @@ class PublicParticipationsController < OpenFresk::ApplicationController
     @custom_price = params[:custom_price]
     @coupon_code = params[:coupon_code]
     @product = @product_configuration.product
-    @presenter = CgvCguPresenter.new(@training_session)
+    #@presenter = CgvCguPresenter.new(@training_session)
   end
 
   def create

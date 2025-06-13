@@ -27,15 +27,6 @@ module Users
 
       return @user if @user.errors.present?
 
-      UserTenant.create!(
-        user_uuid: @user_uuid.uuid,
-        role: user_tenant_role,
-        tenant: Tenant.current,
-        created_by_user_uuid: current_user&.uuid,
-        created_by_tenant_id: Tenant.current.id,
-        main: true
-      )
-
       @user
     end
 

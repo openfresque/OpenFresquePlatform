@@ -51,22 +51,11 @@
 
   </div>
 
-  <% if Tenant.association? && @product.charged? %>
-    <%= render partial: "billing_info", locals: {form:} %>
-  <% end %>
-
-    <div class="col-lg-6 mx-auto my-3">
-      <% if @training_session.formation? %>
-          <%= render partial: "workshop_done_checkbox", locals: {form:} %>
-      <% end %>
-      <!-- CGU & CGV-->
-      <%= form.check_box :cgu,
-                         name: "participation[cgu]",
-                         class: "form-check-input",
-                         id: "cgu",
-                         required: true %>
-      <%= link_to @presenter.cgv_cgu_text, @presenter.cgv_cgu_link, class: "link-secondary", target: :_blank %>
-    </div>
+  <div class="col-lg-6 mx-auto my-3">
+    <% if @training_session.formation? %>
+        <%= render partial: "workshop_done_checkbox", locals: {form:} %>
+    <% end %>
+  </div>
 
   <div class="col-lg-6 mx-auto my-3">
     <%= submit_tag t("participations.create_public_participation"), class: "btn btn-primary btn-block rounded-pill" %>
