@@ -50,6 +50,17 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_06_182713) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "billing_infos", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "contact_id"
+    t.bigint "transaction_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["contact_id"], name: "index_billing_infos_on_contact_id"
+    t.index ["transaction_id"], name: "index_billing_infos_on_transaction_id"
+    t.index ["user_id"], name: "index_billing_infos_on_user_id"
+  end
+
   create_table "color_settings", force: :cascade do |t|
     t.string "primary_color", default: "#007e7c"
     t.string "secondary_color", default: "#d3d7de"
@@ -212,6 +223,9 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_06_182713) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "billing_infos", "transactions"
+  add_foreign_key "billing_infos", "users"
+  add_foreign_key "billing_infos", "users", column: "contact_id"
   add_foreign_key "participations", "users", column: "animator_id"
   add_foreign_key "product_configuration_sessions", "product_configurations"
   add_foreign_key "product_configuration_sessions", "training_sessions"

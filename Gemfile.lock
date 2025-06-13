@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/fresqueduclimat/OpenFresk.git
-  revision: 06363be3b54b5d828dc90abfa2f57b5b833e5e37
+  revision: 152cdd288f227733f07d7afa0362ebf69a3cb424
   branch: feature/product-configurations
   specs:
     open_fresk (0.1.1)
@@ -319,6 +319,7 @@ GEM
       connection_pool (>= 2.2.5, < 3)
       rack (~> 2.0)
       redis (>= 4.5.0, < 5)
+    simple_command (1.0.1)
     sprockets (4.2.2)
       concurrent-ruby (~> 1.0)
       logger
@@ -384,6 +385,7 @@ DEPENDENCIES
   redis (= 4.6.0)
   selenium-webdriver
   sidekiq (= 6.5.12)
+  simple_command (= 1.0.1)
   sprockets-rails
   stimulus-rails
   stripe (= 5.55.0)
