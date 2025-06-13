@@ -5,7 +5,8 @@ module Languages
     end
 
     def call
-      Constants::Locales::LIST.include?(@language) ? @language : "en"
+      #Constants::Locales::LIST.include?(@language) ? @language : "en"
+      "fr"
     end
 
     private
