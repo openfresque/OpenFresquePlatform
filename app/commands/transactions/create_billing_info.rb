@@ -28,7 +28,6 @@ module Transactions
         },
         country_params: {country_id: @contact_params[:country_id]},
         current_user: @user,
-        user_tenant_role: UserTenant::User,
         language: @language
       )
       @contact = contact_command.call

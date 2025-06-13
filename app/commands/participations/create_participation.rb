@@ -2,34 +2,24 @@ module Participations
   class CreateParticipation
     prepend SimpleCommand
 
-    def initialize(participation_params:, current_user:, training_session:, participation_status:, animator: nil,
-                   coanimator: nil)
+    def initialize(participation_params:, current_user:, training_session:, participation_status:, animator: nil)
       @participation_params = participation_params
       @current_user = current_user
       @training_session = training_session
       @participation_status = participation_status
       @animator = animator
-      @coanimator = coanimator
     end
 
     def call
-      email_domain = participation_params[:email].split("@").last
-
       command = Users::CreateUser.new(
         user_params: create_user_params,
         country_params: participation_params,
         current_user:,
-        user_tenant_role: UserTenant::User,
         language: @training_session.language&.code
       )
 
       if find_user.present?
         @user = find_user
-        if @user.isArchived
-          archived_user_update
-        else
-          user_update
-        end
       else
         @user = command.call
       end
@@ -42,7 +32,6 @@ module Participations
       participation.user = @user
       participation.status = participation_status
       participation.animator = @animator
-      participation.coanimator = @coanimator
       participation.save
 
       participation
@@ -70,8 +59,7 @@ module Participations
     end
 
     def find_user
-      email_hash = Digest::SHA256.hexdigest(participation_params[:email].strip.downcase)
-      User.find_by(email_hash:)
+      User.find_by(email: participation_params[:email])
     end
 
     def find_participation

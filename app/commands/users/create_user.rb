@@ -2,20 +2,14 @@ module Users
   class CreateUser
     include SimpleCommand
 
-    def initialize(user_params:, country_params:, current_user:, user_tenant_role:, language: nil)
+    def initialize(user_params:, country_params:, current_user:, language: nil)
       @user_params = user_params
       @country_params = country_params
       @current_user = current_user
-      @user_tenant_role = user_tenant_role
       @language = language
     end
 
     def call
-      ActiveRecord::Base.transaction do
-        @user_uuid = UserUuid.create!(uuid: SecureRandom.uuid)
-        AnimatorInfo.create!(user_uuid: @user_uuid.uuid)
-      end
-
       @user = User.new(user_params)
       @user.uuid = @user_uuid.uuid
       @user.token = SecureRandom.uuid
@@ -32,14 +26,10 @@ module Users
 
     private
 
-    attr_reader :user_params, :country_params, :current_user, :user_tenant_role, :language
+    attr_reader :user_params, :country_params, :current_user, :language
 
     def set_language
-      @user.native_language = if @language.present?
-                                Constants::Locales::LIST.include?(@language) ? @language : "en"
-                              else
-                                Constants::Locales::LIST.include?(@user.country&.code&.downcase) ? @user.country&.code&.downcase : "en"
-                              end
+      "fr"
     end
   end
 end
