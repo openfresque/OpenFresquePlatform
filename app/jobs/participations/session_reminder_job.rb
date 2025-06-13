@@ -11,8 +11,7 @@ module Participations
         language = Languages::SetEmailLanguage.new(language: user.native_language).call
         subject = I18n.t(
           "participation.session_reminder.subject_#{subject_translation_key(participation)}",
-          locale: language,
-          organisation: organisation(participation)
+          locale: language
         )
         ParticipationMailer.with(locale: language)
                            .session_reminder_email(subject:,
@@ -28,17 +27,9 @@ module Participations
     def subject_translation_key(participation)
       if participation.participant?
         "participant"
-      elsif participation.training_session.qualiopi?
-        participation.training_session.inter_company? ? "animator_qualiopi_inter" : "animator_qualiopi"
       else
         "animator"
       end
-    end
-
-    def organisation(participation)
-      return unless participation.training_session.qualiopi?
-
-      participation.participant? ? nil : participation.training_session.organisation
     end
   end
 end

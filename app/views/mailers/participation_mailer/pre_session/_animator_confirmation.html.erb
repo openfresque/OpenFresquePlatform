@@ -4,7 +4,3 @@
 <%= render "participation_mailer/email_content/session_info_animator", training_session: %>
 <!-- SESSION CTA -->
 <%= render "participation_mailer/email_content/session_cta", session_url: %>
-<% if training_session.qualiopi? %>
-<!-- QUALIPI REGISTRATION SHEET REMINDER -->
-  <%= render "participation_mailer/email_content/registration_sheet_reminder", training_session: %>
-<% end %>
