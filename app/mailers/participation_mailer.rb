@@ -1,10 +1,9 @@
 class ParticipationMailer < ApplicationMailer
   include Rails.application.routes.url_helpers
 
-  def session_registration_confirmation_email(subject:, user:, participation:, tenant:)
+  def session_registration_confirmation_email(subject:, user:, participation:)
     @subject = subject
     @participation = participation
-    @tenant = tenant
     @user = user
     @participation = participation
     @training_session = @participation.training_session.decorate
@@ -17,10 +16,9 @@ class ParticipationMailer < ApplicationMailer
     mail(to: recipient_email, subject: @subject)
   end
 
-  def session_reminder_email(subject:, user:, participation:, tenant:)
+  def session_reminder_email(subject:, user:, participation:)
     @subject = subject
     @participation = participation
-    @tenant = tenant
     @user = user
     @training_session = @participation.training_session.decorate
     @participation = participation
@@ -47,13 +45,13 @@ class ParticipationMailer < ApplicationMailer
     if @participation.participant?
       build_participant_cta_urls
     else
-      @session_url = training_session_url(@training_session.id, host: ENV["HOST"], subdomain: @tenant.subdomain)
+      @session_url = training_session_url(@training_session.id, host: ENV["HOST"])
     end
   end
 
   def build_participant_cta_urls
-    @invoice_url = participation_url(@participation.id, host: ENV["HOST"], subdomain: @tenant.subdomain, token: @user.token, tenant_token: @tenant.token)
-    @invitation_url = participation_participation_invitations_url(@participation, host: ENV["HOST"], subdomain: @tenant.subdomain, format: :pdf)
-    @reset_password_url = future_facilitator_access_index_url(host: ENV["HOST"], subdomain: @user.tenant.subdomain, language: @language)
+    @invoice_url = participation_url(@participation.id, host: ENV["HOST"], token: @user.token)
+    @invitation_url = participation_participation_invitations_url(@participation, host: ENV["HOST"], format: :pdf)
+    @reset_password_url = future_facilitator_access_index_url(host: ENV["HOST"], language: @language)
   end
 end

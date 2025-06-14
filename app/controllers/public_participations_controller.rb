@@ -7,7 +7,7 @@ class PublicParticipationsController < OpenFresk::ApplicationController
     #@language = Languages::SetLanguage.new(params, current_user).call
     if @training_session.nil?
       flash[:alert] = t("training_sessions.not_found")
-      return redirect_to public_training_sessions_path(tenant_token: Tenant.current.token, language: @language)
+      return redirect_to public_training_sessions_path(language: @language)
     end
     @product_configurations = @training_session.product_configurations
                                                .includes([:product])
@@ -29,7 +29,6 @@ class PublicParticipationsController < OpenFresk::ApplicationController
         custom_price: nil,
         product_configuration_id: @product_configurations.first.id,
         coupon_code: nil,
-        tenant_token: params[:tenant_token],
         user_token: params[:user_token]
       },
       options: {
@@ -73,11 +72,10 @@ class PublicParticipationsController < OpenFresk::ApplicationController
         @participation.update!(status: Participation::Declined)
         transaction.destroy! if params[:transaction_id].present?
       end
-      redirect_to public_training_sessions_path(tenant_token: Tenant.current.token),
+      redirect_to public_training_sessions_path,
                   notice: t("my_participation.cancelled")
     else
-      redirect_to show_public_training_session_path(@training_session, user_token: @participation.user.token,
-                                                                       tenant_token: Tenant.current.token)
+      redirect_to show_public_training_session_path(@training_session, user_token: @participation.user.token)
     end
   end
 
@@ -109,10 +107,10 @@ class PublicParticipationsController < OpenFresk::ApplicationController
         redirect_to new_payment_path(transaction_id: transaction.id, language: @language)
       else
         @participation.update!(status: Participation::Confirmed)
-        Participations::SessionRegistrationConfirmationJob.perform_later(@participation.id, Tenant.current.id)
+        Participations::SessionRegistrationConfirmationJob.perform_later(@participation.id)
         flash[:notice] = t("my_participation.confirmed", email: @participation.user.email)
         redirect_to show_public_training_session_path(transaction.training_session.id,
-                                                      user_token: @participation.user.token, tenant_token: Tenant.current.token, language: @language)
+                                                      user_token: @participation.user.token, language: @language)
       end
     else
       flash[:alert] = command.errors.full_messages.to_sentence
@@ -186,8 +184,7 @@ class PublicParticipationsController < OpenFresk::ApplicationController
       true
     elsif !participation.nil? && participation.confirmed?
       flash[:notice] = t("my_participation.already_confirmed")
-      redirect_to show_public_training_session_path(@training_session, user_token: participation.user.token,
-                                                                       tenant_token: Tenant.current.token, language: @language)
+      redirect_to show_public_training_session_path(@training_session, user_token: participation.user.token, language: @language)
       true
     end
   end

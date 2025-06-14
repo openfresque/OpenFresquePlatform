@@ -3,10 +3,8 @@ module Participations
     include Rails.application.routes.url_helpers
     sidekiq_options queue: :critical
 
-    def perform(participation_id, tenant_id)
-      tenant = Tenant.find(tenant_id)
-      Apartment::Tenant.switch(tenant.subdomain) do
-        participation = Participation.find(participation_id)
+    def perform(participation_id)
+      participation = Participation.find(participation_id)
         user = participation.user
         language = Languages::SetEmailLanguage.new(language: user.native_language).call
         subject = I18n.t(
@@ -16,10 +14,8 @@ module Participations
         ParticipationMailer.with(locale: language)
                            .session_reminder_email(subject:,
                                                    user:,
-                                                   participation:,
-                                                   tenant: Tenant.current)
+                                                   participation:)
                            .deliver_now
-      end
     end
 
     private

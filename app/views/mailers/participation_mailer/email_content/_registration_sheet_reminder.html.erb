@@ -14,7 +14,6 @@
                 training_session_registrations_form_url(
                   @training_session.id,
                   host: ENV["HOST"],
-                  subdomain: @tenant.subdomain,
                   format: :pdf,
                   user_uuid: @user.id
                 ),
