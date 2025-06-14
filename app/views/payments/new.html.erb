@@ -37,5 +37,4 @@
 
   </form>
 </div>
-<%= render "public_participations/cancel_participation_modal", decline_path: decline_participation_training_session_public_participation_path(@transaction.participation.training_session, @transaction.participation, transaction_id: @transaction.id, language: @language) %>
 <div id="stripe_public_key" data-stripe_public_key="<%= @stripe_public_key %>"></div>

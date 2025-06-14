@@ -111,7 +111,7 @@ class PublicParticipationsController < OpenFresk::ApplicationController
         @participation.update!(status: Participation::Confirmed)
         Participations::SessionRegistrationConfirmationJob.perform_later(@participation.id, Tenant.current.id)
         flash[:notice] = t("my_participation.confirmed", email: @participation.user.email)
-        redirect_to show_public_training_session_path(transaction.training_session.uuid,
+        redirect_to show_public_training_session_path(transaction.training_session.id,
                                                       user_token: @participation.user.token, tenant_token: Tenant.current.token, language: @language)
       end
     else

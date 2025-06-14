@@ -16,9 +16,9 @@ class PaymentsController < OpenFresk::ApplicationController
         enabled: true
       },
       metadata: {
-        user_uuid: @transaction.participation.user.uuid,
+        user_uuid: @transaction.participation.user.id,
         participation_id: @transaction.participation.id,
-        training_session_uuid: @transaction.participation.training_session.uuid,
+        training_session_uuid: @transaction.participation.training_session.id,
         invoice_number: @transaction.invoice_number,
         product_identifier: @transaction.product_configuration&.product&.identifier,
         training_session_country: @transaction.participation.training_session&.country&.name
@@ -44,7 +44,7 @@ class PaymentsController < OpenFresk::ApplicationController
       transaction.participation.update!(status: Participation::Confirmed)
       Participations::SessionRegistrationConfirmationJob.perform_later(transaction.participation.id)
       flash[:notice] = t("my_participation.confirmed", email: transaction.user.email)
-      redirect_to show_public_training_session_path(transaction.training_session.uuid,
+      redirect_to show_public_training_session_path(transaction.training_session.id,
                                                     user_token: transaction.participation.user.token)
     else
       transaction.update!(status: Transaction::Failure)

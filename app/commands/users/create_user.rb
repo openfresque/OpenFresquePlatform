@@ -11,7 +11,6 @@ module Users
 
     def call
       @user = User.new(user_params)
-      @user.uuid = @user_uuid.uuid
       @user.token = SecureRandom.uuid
       @user.refresh_token = SecureRandom.uuid
       @user.country_id = country_params[:country_id].to_i

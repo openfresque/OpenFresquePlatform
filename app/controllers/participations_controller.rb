@@ -18,7 +18,7 @@ class ParticipationsController < ApplicationController
     @participation.update!(status: Participation::Declined)
     CancelParticipationJob.perform_later(@participation.training_session.id, @participation.user.id)
     flash[:notice] = t("my_participation.cancelled")
-    redirect_to show_public_training_session_path(@participation.training_session.uuid,
+    redirect_to show_public_training_session_path(@participation.training_session.id,
                                                   user_token: @participation.user.token, language: @language)
   end
 
@@ -33,7 +33,7 @@ class ParticipationsController < ApplicationController
         Sentry.capture_exception(e)
         @transaction.update!(status: Transaction::Failure)
         flash[:alert] = t("my_participation.refund_failed")
-        return redirect_to show_public_training_session_path(@participation.training_session.uuid,
+        return redirect_to show_public_training_session_path(@participation.training_session.id,
                                                              user_token: @participation.user.token, language: @language)
       end
       @transaction.update!(status: Transaction::Refund)
@@ -59,7 +59,7 @@ class ParticipationsController < ApplicationController
   end
 
   def set_training_session
-    @training_session = TrainingSession.find_by(uuid: params[:training_session_id])
+    @training_session = TrainingSession.find(params[:training_session_id])
   end
 
   def set_language

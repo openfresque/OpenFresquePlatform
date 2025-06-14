@@ -47,7 +47,7 @@ class ParticipationMailer < ApplicationMailer
     if @participation.participant?
       build_participant_cta_urls
     else
-      @session_url = training_session_url(@training_session.uuid, host: ENV["HOST"], subdomain: @tenant.subdomain)
+      @session_url = training_session_url(@training_session.id, host: ENV["HOST"], subdomain: @tenant.subdomain)
     end
   end
 

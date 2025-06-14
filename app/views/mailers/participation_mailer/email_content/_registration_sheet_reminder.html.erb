@@ -12,11 +12,11 @@
   <p style="<%= Constants::SendInBlue::STYLE_CENTER %>">
     <%= link_to(t("registration_form_pdf.download"),
                 training_session_registrations_form_url(
-                  @training_session.uuid,
+                  @training_session.id,
                   host: ENV["HOST"],
                   subdomain: @tenant.subdomain,
                   format: :pdf,
-                  user_uuid: @user.uuid
+                  user_uuid: @user.id
                 ),
                 style: Constants::SendInBlue::STYLE_CALL_TO_ACTION_BTN) %>
   </p>
