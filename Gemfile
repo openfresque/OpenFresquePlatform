@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.2.2"
 
-gem 'open_fresk', :git => 'https://github.com/fresqueduclimat/OpenFresk.git', :branch => 'feature/feedback-lea-sessions'
+gem 'open_fresk', :git => 'https://github.com/fresqueduclimat/OpenFresk.git', :branch => 'feature/product-configurations'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.8", ">= 7.0.8.1"
@@ -38,6 +38,10 @@ gem "sidekiq", "6.5.12"
 gem "administrate"
 gem "administrate-field-active_storage"
 gem "attr_encrypted", "4.2.0"
+gem "money-rails", "1.15.0"
+gem "stripe", "5.55.0"
+gem "simple_command", "1.0.1"
+gem "repost", "0.4.2"
 
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]

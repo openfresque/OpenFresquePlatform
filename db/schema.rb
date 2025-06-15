@@ -50,6 +50,17 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_06_182713) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "billing_infos", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "contact_id"
+    t.bigint "transaction_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["contact_id"], name: "index_billing_infos_on_contact_id"
+    t.index ["transaction_id"], name: "index_billing_infos_on_transaction_id"
+    t.index ["user_id"], name: "index_billing_infos_on_user_id"
+  end
+
   create_table "color_settings", force: :cascade do |t|
     t.string "primary_color", default: "#007e7c"
     t.string "secondary_color", default: "#d3d7de"
@@ -88,6 +99,53 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_06_182713) do
     t.integer "port", default: 587, null: false
     t.string "username", null: false
     t.string "password", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "participations", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "training_session_id", null: false
+    t.string "status", default: "PENDING", null: false
+    t.datetime "presence_recorded_at", precision: nil
+    t.bigint "animator_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["animator_id"], name: "index_participations_on_animator_id"
+    t.index ["training_session_id"], name: "index_participations_on_training_session_id"
+    t.index ["user_id"], name: "index_participations_on_user_id"
+  end
+
+  create_table "product_configuration_sessions", force: :cascade do |t|
+    t.bigint "product_configuration_id", null: false
+    t.bigint "training_session_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_configuration_id"], name: "index_prod_config_sess_on_prod_config_id"
+    t.index ["training_session_id"], name: "index_prod_config_sess_on_train_sess_id"
+  end
+
+  create_table "product_configurations", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "country_id", null: false
+    t.integer "before_tax_price_cents"
+    t.integer "tax_cents"
+    t.integer "after_tax_price_cents"
+    t.decimal "tax_rate", precision: 3, scale: 1
+    t.string "currency"
+    t.string "display_name", null: false
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id", "country_id"], name: "index_product_configurations_on_product_id_and_country_id", unique: true
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "identifier", null: false
+    t.string "category", null: false
+    t.boolean "charged", default: false, null: false
+    t.boolean "price_modifiable", default: false, null: false
+    t.string "audience"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -131,6 +189,22 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_06_182713) do
     t.text "animator_session_info"
   end
 
+  create_table "transactions", force: :cascade do |t|
+    t.bigint "participation_id"
+    t.bigint "product_configuration_id"
+    t.text "stripe_response"
+    t.string "status"
+    t.integer "before_tax_price_cents"
+    t.integer "tax_cents"
+    t.integer "after_tax_price_cents"
+    t.string "currency"
+    t.string "payment_intent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["participation_id"], name: "index_transactions_on_participation_id"
+    t.index ["product_configuration_id"], name: "index_transactions_on_product_configuration_id"
+  end
+
   create_table "users", id: :serial, force: :cascade do |t|
     t.string "email", null: false
     t.string "firstname"
@@ -149,4 +223,12 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_06_182713) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "billing_infos", "transactions"
+  add_foreign_key "billing_infos", "users"
+  add_foreign_key "billing_infos", "users", column: "contact_id"
+  add_foreign_key "participations", "users", column: "animator_id"
+  add_foreign_key "product_configuration_sessions", "product_configurations"
+  add_foreign_key "product_configuration_sessions", "training_sessions"
+  add_foreign_key "transactions", "participations"
+  add_foreign_key "transactions", "product_configurations"
 end

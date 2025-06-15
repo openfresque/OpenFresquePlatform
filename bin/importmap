@@ -2,3 +2,6 @@
 
 require_relative "../config/application"
 require "importmap/commands"
+
+pin "ticket_choice", to: "ticket_choice.js", preload: true
+pin "checkout", to: "checkout.js", preload: true

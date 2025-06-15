@@ -18,3 +18,7 @@ pin "open_fresk",                   to: "open_fresk/application.js", preload: tr
 # ——— Controllers (host + engine) ———
 pin_all_from "app/javascript/controllers",            under: "controllers"
 pin_all_from "app/javascript/open_fresk/controllers", under: "open_fresk/controllers"
+
+pin "checkout", to: "checkout.js", preload: true
+pin "ticket_choice", to: "ticket_choice.js", preload: true
+pin "show_toast", to: "show_toast.js", preload: true
