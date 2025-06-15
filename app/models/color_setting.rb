@@ -1,2 +1,2 @@
-class ColorSetting < ApplicationRecord
+class ColorSetting < OpenFresk::ColorSetting
 end
