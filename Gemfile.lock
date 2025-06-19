@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/fresqueduclimat/OpenFresk.git
-  revision: 1d9ae011d190723f3003768f27378a8d8f3ad2cd
+  revision: 76c31b54455a36991e8dc5ca77a206d3c5e0518b
   branch: refactor-payment-code
   specs:
     open_fresk (0.1.1)
