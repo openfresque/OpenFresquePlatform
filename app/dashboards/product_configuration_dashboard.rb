@@ -8,8 +8,8 @@ class ProductConfigurationDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    product: Field::BelongsTo,
-    country: Field::BelongsTo,
+    product: Field::BelongsTo.with_options(class_name: "Product"),
+    country: Field::BelongsTo.with_options(class_name: "Country"),
     id: Field::Number,
     before_tax_price_cents: Field::Number,
     tax_cents: Field::Number,
