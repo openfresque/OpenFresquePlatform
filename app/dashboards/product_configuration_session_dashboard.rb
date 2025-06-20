@@ -8,8 +8,8 @@ class ProductConfigurationSessionDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    product_configuration: Field::BelongsTo,
-    training_session: Field::BelongsTo,
+    product_configuration: Field::BelongsTo.with_options(class_name: "ProductConfiguration"),
+    training_session: Field::BelongsTo.with_options(class_name: "TrainingSession"),
     id: Field::Number,
     created_at: Field::DateTime,
     updated_at: Field::DateTime

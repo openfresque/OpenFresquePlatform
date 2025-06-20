@@ -1,2 +1,2 @@
-class Language < ApplicationRecord
+class Language < OpenFresk::Language
 end
