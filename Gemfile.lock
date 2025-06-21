@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/fresqueduclimat/OpenFresk.git
-  revision: c833e89f4d36f87f9222e02d47130cdcb0f2b990
-  branch: refactor-payment-code
+  revision: fded57b794e9d9b5ac12558e1e27f22e9f7d5430
+  branch: feature/public_training_sessions
   specs:
     open_fresk (0.1.1)
       bootstrap (= 5.3.1)
@@ -219,7 +219,7 @@ GEM
       money (~> 6.13)
       railties (>= 3.0)
     msgpack (1.8.0)
-    net-imap (0.5.8)
+    net-imap (0.5.9)
       date
       net-protocol
     net-pop (0.1.2)

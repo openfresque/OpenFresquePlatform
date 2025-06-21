@@ -20,6 +20,10 @@ Rails.application.routes.draw do
       get :show_public
     end
 
+    collection do
+      get :public
+    end
+
     resources :public_participations, only: %i[create] do
       collection do
         get :ticket_choice
