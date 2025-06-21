@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/fresqueduclimat/OpenFresk.git
-  revision: fded57b794e9d9b5ac12558e1e27f22e9f7d5430
-  branch: feature/public_training_sessions
+  revision: cd04937376ff542a0c930a634a0bda3d8e674fc7
+  branch: main
   specs:
     open_fresk (0.1.1)
       bootstrap (= 5.3.1)
@@ -15,7 +15,6 @@ GIT
       sass-rails (>= 6)
       sidekiq (= 6.5.12)
       sprockets-rails
-      view_component
 
 GEM
   remote: https://rubygems.org/
@@ -342,10 +341,6 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
-    view_component (3.23.2)
-      activesupport (>= 5.2.0, < 8.1)
-      concurrent-ruby (~> 1)
-      method_source (~> 1.0)
     web-console (4.2.1)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
