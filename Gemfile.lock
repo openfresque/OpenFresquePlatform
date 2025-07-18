@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/fresqueduclimat/OpenFresk.git
-  revision: 793effa87378d0e295ee0b1f9678afb07f4f6d34
-  branch: hotfix/feedback-francois
+  revision: 5225cfc0d8118dac8f11a7a210a0bac0ce278b55
+  branch: main
   specs:
     open_fresk (0.1.1)
       bootstrap (= 5.3.1)
@@ -137,7 +137,7 @@ GEM
       dotenv (= 2.7.6)
       railties (>= 3.2)
     encryptor (3.0.0)
-    erb (5.0.1)
+    erb (5.0.2)
     erubi (1.13.1)
     execjs (2.10.0)
     ffi (1.17.2-aarch64-linux-gnu)
@@ -160,7 +160,7 @@ GEM
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
       railties (>= 6.0.0)
-    io-console (0.8.0)
+    io-console (0.8.1)
     irb (1.15.2)
       pp (>= 0.6.0)
       rdoc (>= 4.0.0)
@@ -289,7 +289,7 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.3.0)
-    rdoc (6.14.1)
+    rdoc (6.14.2)
       erb
       psych (>= 4.0.0)
     redis (4.6.0)
@@ -310,7 +310,7 @@ GEM
       sprockets-rails
       tilt
     selectize-rails (0.12.6)
-    selenium-webdriver (4.33.0)
+    selenium-webdriver (4.34.0)
       base64 (~> 0.2)
       logger (~> 1.4)
       rexml (~> 3.2, >= 3.2.5)
@@ -334,7 +334,7 @@ GEM
     stringio (3.1.7)
     stripe (5.55.0)
     thor (1.3.2)
-    tilt (2.6.0)
+    tilt (2.6.1)
     timeout (0.4.3)
     turbo-rails (2.0.12)
       actionpack (>= 6.0.0)
