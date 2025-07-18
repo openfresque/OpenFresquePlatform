@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/fresqueduclimat/OpenFresk.git
   revision: 4c62f6a2a3995cb1d6565c72679f8bb38c6cab82
-  branch: main
+  branch: hotfix/feedback-francois
   specs:
     open_fresk (0.1.1)
       bootstrap (= 5.3.1)
