@@ -58,11 +58,15 @@ as well as a link to its edit page.
 
           <dd class="attribute-data attribute-data--<%=attribute.html_class%>">
             <% if attribute.name.to_sym == :logo && page.resource.logo.attached? %>
-              <%= image_tag main_app.url_for(page.resource.logo), style: "max-width: 200px; max-height: 200px;" %>
+              <%= image_tag url_for(page.resource.logo), style: "max-width: 200px; max-height: 200px;" %>
+            <% elsif attribute.name.to_sym == :favicon && page.resource.favicon.attached? %>
+              <%= image_tag url_for(page.resource.favicon), style: "max-width: 50px; max-height: 50px;" %>
             <% else %>
               <%= render_field attribute, page: page %>
             <% end %>
           </dd>
+
+      
         <% end %>
       </fieldset>
     <% end %>
