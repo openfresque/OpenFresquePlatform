@@ -4,6 +4,7 @@
 
 # OpenFresk
 
+
 OpenFresk is a 100% open-source project for non-profit organizations to deploy and manage interactive "Fresque" workshops on a self-hosted web platform.
 
 > **Self-hosted.** Deploy on your own infrastructure and retain full control over your data.
