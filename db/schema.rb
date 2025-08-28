@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_06_06_182713) do
+ActiveRecord::Schema[7.0].define(version: 2025_07_22_155326) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -90,15 +90,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_06_182713) do
 
   create_table "open_fresk_settings", force: :cascade do |t|
     t.string "non_profit_name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "open_fresk_smtp_settings", force: :cascade do |t|
-    t.string "host", null: false
-    t.integer "port", default: 587, null: false
-    t.string "username", null: false
-    t.string "password", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -216,6 +207,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_06_06_182713) do
     t.string "language", default: "fr", null: false
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+    t.string "native_language", default: "fr", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["refresh_token"], name: "index_users_on_refresh_token", unique: true
     t.index ["token"], name: "index_users_on_token", unique: true
