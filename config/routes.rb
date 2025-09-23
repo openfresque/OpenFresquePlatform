@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       resources :products
       resources :product_configurations
       resources :product_configuration_sessions, only: %i[index show edit update]
+      resources :api_tokens
 
       root to: "users#index"
     end

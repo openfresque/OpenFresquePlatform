@@ -3,7 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.2.2"
 
-gem 'open_fresk', :git => 'https://github.com/fresqueduclimat/OpenFresk.git', :branch => 'main'
+# Uncomment this line before merging to main
+gem 'open_fresk', :git => 'https://github.com/fresqueduclimat/OpenFresk.git', :branch => '3106-add_user_role_to_user_model'
+
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.8", ">= 7.0.8.1"
