@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/fresqueduclimat/OpenFresk.git
-  revision: 9b09dadf178f6b0b9c791f3557694fada993c10e
-  branch: 3106-add_user_role_to_user_model
+  revision: e6f03ef181aa65b4a345d664f177398a5bc38808
+  branch: main
   specs:
     open_fresk (0.1.1)
       bootstrap (= 5.3.1)
