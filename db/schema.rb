@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_07_22_155326) do
+ActiveRecord::Schema[7.0].define(version: 2025_09_22_174946) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -48,6 +48,14 @@ ActiveRecord::Schema[7.0].define(version: 2025_07_22_155326) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "api_tokens", force: :cascade do |t|
+    t.string "token"
+    t.string "label"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["token"], name: "index_api_tokens_on_token"
   end
 
   create_table "billing_infos", force: :cascade do |t|
@@ -208,6 +216,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_07_22_155326) do
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.string "native_language", default: "fr", null: false
+    t.string "user_role", default: "user"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["refresh_token"], name: "index_users_on_refresh_token", unique: true
     t.index ["token"], name: "index_users_on_token", unique: true
