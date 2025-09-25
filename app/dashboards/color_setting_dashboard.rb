@@ -10,7 +10,7 @@ class ColorSettingDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     primary_color: ColorField,
-    secondary_color: ColorField,
+    secondary_color: ColorField.with_options(name: "Header color"),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze

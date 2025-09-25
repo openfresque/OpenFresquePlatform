@@ -13,7 +13,7 @@ class UserDashboard < Administrate::BaseDashboard
     user_role: Field::Select.with_options(collection: User::USER_ROLES),
     email: Field::String,
     firstname: Field::String,
-    language: Field::Select.with_options(collection: ["fr", "en"]),
+    native_language: Field::Select.with_options(collection: ["fr", "en"]),
     lastname: Field::String,
     password: Field::String,
     refresh_token: Field::String,
@@ -44,7 +44,7 @@ class UserDashboard < Administrate::BaseDashboard
     email
     firstname
     lastname
-    language
+    native_language
     created_at
     updated_at
   ].freeze
@@ -57,7 +57,7 @@ class UserDashboard < Administrate::BaseDashboard
     user_role
     firstname
     lastname
-    language
+    native_language
     email
   ].freeze
 
