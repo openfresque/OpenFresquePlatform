@@ -102,6 +102,15 @@ ActiveRecord::Schema[7.0].define(version: 2025_09_22_174946) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "open_fresk_smtp_settings", force: :cascade do |t|
+    t.string "host", null: false
+    t.integer "port", default: 587, null: false
+    t.string "username", null: false
+    t.string "password", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "participations", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "training_session_id", null: false
