@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_09_22_174946) do
+ActiveRecord::Schema[7.0].define(version: 2025_10_07_120607) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -102,15 +102,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_09_22_174946) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "open_fresk_smtp_settings", force: :cascade do |t|
-    t.string "host", null: false
-    t.integer "port", default: 587, null: false
-    t.string "username", null: false
-    t.string "password", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "participations", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "training_session_id", null: false
@@ -119,6 +110,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_09_22_174946) do
     t.bigint "animator_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "facilitator_role"
     t.index ["animator_id"], name: "index_participations_on_animator_id"
     t.index ["training_session_id"], name: "index_participations_on_training_session_id"
     t.index ["user_id"], name: "index_participations_on_user_id"

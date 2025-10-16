@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :product_configurations
       resources :product_configuration_sessions, only: %i[index show edit update]
       resources :api_tokens
+      resources :participations
 
       root to: "users#index"
     end
@@ -34,7 +35,7 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :session_participations, only: %i[show]
+  # resources :session_participations, only: %i[show]
 
   resources :payments, only: %i[new create] do
     collection do
