@@ -34,8 +34,6 @@ Rails.application.routes.draw do
       end
     end
   end
-  
-  resources :session_participations, only: %i[show]
 
   resources :payments, only: %i[new create] do
     collection do
@@ -44,7 +42,6 @@ Rails.application.routes.draw do
       post :stripe_webhook
     end
   end
-  
 
   mount OpenFresk::Engine => "/"
 end
