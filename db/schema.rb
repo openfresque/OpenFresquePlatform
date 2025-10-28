@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_10_07_120607) do
+ActiveRecord::Schema[7.0].define(version: 2025_10_21_141719) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -116,6 +116,13 @@ ActiveRecord::Schema[7.0].define(version: 2025_10_07_120607) do
     t.index ["user_id"], name: "index_participations_on_user_id"
   end
 
+  create_table "permission_actions", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_permission_actions_on_name", unique: true
+  end
+
   create_table "product_configuration_sessions", force: :cascade do |t|
     t.bigint "product_configuration_id", null: false
     t.bigint "training_session_id", null: false
@@ -148,6 +155,22 @@ ActiveRecord::Schema[7.0].define(version: 2025_10_07_120607) do
     t.string "audience"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "rules", force: :cascade do |t|
+    t.bigint "permission_action_id", null: false
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["permission_action_id"], name: "index_rules_on_permission_action_id"
+  end
+
+  create_table "rules_user_roles", id: false, force: :cascade do |t|
+    t.bigint "rule_id", null: false
+    t.bigint "user_role_id", null: false
+    t.index ["rule_id", "user_role_id"], name: "index_rules_user_roles_on_rule_id_and_user_role_id", unique: true
+    t.index ["rule_id"], name: "index_rules_user_roles_on_rule_id"
+    t.index ["user_role_id"], name: "index_rules_user_roles_on_user_role_id"
   end
 
   create_table "smtp_settings", force: :cascade do |t|
@@ -205,6 +228,13 @@ ActiveRecord::Schema[7.0].define(version: 2025_10_07_120607) do
     t.index ["product_configuration_id"], name: "index_transactions_on_product_configuration_id"
   end
 
+  create_table "user_roles", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_user_roles_on_name", unique: true
+  end
+
   create_table "users", id: :serial, force: :cascade do |t|
     t.string "email", null: false
     t.string "firstname"
@@ -231,6 +261,9 @@ ActiveRecord::Schema[7.0].define(version: 2025_10_07_120607) do
   add_foreign_key "participations", "users", column: "animator_id"
   add_foreign_key "product_configuration_sessions", "product_configurations"
   add_foreign_key "product_configuration_sessions", "training_sessions"
+  add_foreign_key "rules", "permission_actions"
+  add_foreign_key "rules_user_roles", "rules"
+  add_foreign_key "rules_user_roles", "user_roles"
   add_foreign_key "transactions", "participations"
   add_foreign_key "transactions", "product_configurations"
 end

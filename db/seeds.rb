@@ -7,6 +7,7 @@ User.find_or_create_by!(email: 'vdaubry@gmail.com') do |user|
   user.refresh_token = SecureRandom.hex(16)
   user.language = 'fr'
   user.admin = true
+  user.user_role = User::Facilitator
 end
 puts "Created/Updated test user with email: vdaubry@gmail.com"
 
@@ -18,6 +19,7 @@ User.find_or_create_by!(email: 'lea.juskiewenski@fresqueduclimat.org') do |user|
   user.refresh_token = SecureRandom.hex(16)
   user.language = 'fr'
   user.admin = true
+  user.user_role = User::Facilitator
 end
 
 puts "Created/Updated test user with email: lea.juskiewenski@fresqueduclimat.org"
@@ -30,6 +32,7 @@ User.find_or_create_by!(email: 'bastien.grandjean@fresqueduclimat.org') do |user
   user.refresh_token = SecureRandom.hex(16)
   user.language = 'fr'
   user.admin = true
+  user.user_role = User::Facilitator
 end
 
 puts "Created/Updated test user with email: bastien.grandjean@fresqueduclimat.org"

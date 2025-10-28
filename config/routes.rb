@@ -10,7 +10,10 @@ Rails.application.routes.draw do
       resources :product_configuration_sessions, only: %i[index show edit update]
       resources :api_tokens
       resources :participations
-      
+      resources :user_roles
+      resources :permission_actions
+      resources :rules
+
       root to: "users#index"
     end
   root to: "training_sessions#index"

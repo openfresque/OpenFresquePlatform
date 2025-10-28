@@ -42,6 +42,7 @@ gem "money-rails", "1.15.0"
 gem "stripe", "5.55.0"
 gem "simple_command", "1.0.1"
 gem "repost", "0.4.2"
+gem "pundit"
 
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
