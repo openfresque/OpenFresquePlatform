@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/fresqueduclimat/OpenFresk.git
-  revision: 74638c3e51c29329613c3168893e12403c538061
+  revision: 599663ad39c4514d5edb751ba9374c9c4394b8bd
   branch: main
   specs:
     open_fresk (0.1.1)
