@@ -3,7 +3,7 @@ require "administrate/base_dashboard"
 class UserRoleDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    name: Field::Select.with_options(collection: User.user_role_values),
+    name: Field::Select.with_options(collection: UserRole.name_values),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
