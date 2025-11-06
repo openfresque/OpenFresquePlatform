@@ -10,7 +10,7 @@ class UserDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     admin: Field::Boolean,
-    user_role: Field::Select.with_options(collection: User.user_role_values),
+    user_role: Field::Select.with_options(collection: UserRole.all.map {|user_role| user_role.name}),
     email: Field::String,
     firstname: Field::String,
     native_language: Field::Select.with_options(collection: ["fr", "en"]),
